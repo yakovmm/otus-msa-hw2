@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-otus-msa-hw1-rewrite
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - path: /otusapp/yakovmm(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: otus-msa-hw1
+                port:
+                  number: 80

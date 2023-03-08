@@ -1,0 +1,43 @@
+server:
+  port: ${HTTP_PORT:80}
+
+logging:
+  level:
+    ROOT: ${APP_LOG_LEVEL:INFO}
+
+web:
+  root: api/v1
+
+spring:
+  profiles:
+    active: dev
+    default: dev
+  application:
+    name: crud
+  jpa:
+    show-sql: false
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc.lob.non_contextual_creation: true
+        default_schema: test_hw2
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: validate
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: ${DB_HOST:jdbc:postgresql://localhost:5432/test}
+    username: ${DB_USER:sa}
+    password: ${DB_PASSWORD:postgres}
+    hikari:
+      connection-test-query: Select 1
+  sql:
+    init:
+      mode: always
+      platform: postgres
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      username: sa
+      password: postgres

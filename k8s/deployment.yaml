@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-msa-hw1
+  labels:
+    app: ym-otus-msa-hw2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ym-otus-msa-hw2
+  template:
+    metadata:
+      labels:
+        app: ym-otus-msa-hw2
+    spec:
+      containers:
+        - name: otus-msa-hw2
+          image: yakovmm/otus-msa-hw2:v1
+          ports:
+          - containerPort: 80
+          env:
+            - name: HTTP_PORT
+              value: "8000"
+            - name: APP_LOG_LEVEL
+              value: ERROR
+            - name: DB_HOST
+              value: jdbc:postgresql://postgres-db/test
+            - name: DB_USER
+              value: sa
+            - name: DB_PASSWORD
+              value: postgres
+          livenessProbe:
+            httpGet:
+              path: /probe/live
+              port: 8000
+            initialDelaySeconds: 25
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /probe/ready
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 3
