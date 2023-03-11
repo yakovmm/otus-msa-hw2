@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-otus-msa-hw1
+  name: ingress-otus-msa-hw2
 spec:
   ingressClassName: nginx
   rules:
@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: otus-msa-hw1
+                name: otus-msa-hw2
                 port:
                   number: 80

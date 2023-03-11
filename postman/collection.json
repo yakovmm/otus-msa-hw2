@@ -1,0 +1,602 @@
+{
+	"info": {
+		"_postman_id": "b093dae0-5645-4373-ad83-5876fdf58b32",
+		"name": "OTUS-MSA-HW2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get ALL Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}\\user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.username).to.eql(\"username_3\");\r",
+							"    pm.expect(jsonData.firstname).to.eql(\"firstname_3\");\r",
+							"    pm.expect(jsonData.lastname).to.eql(\"lastname_3\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"user_3@gmail.com\");\r",
+							"    pm.expect(jsonData.phone).to.eql(\"+79001234003\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}\\user\\3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User 10",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(404);\r",
+							"    pm.expect(jsonData.message).to.eql(\"User with ID 10 is not found\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}\\user\\10",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"pm.collectionVariables.set(\"userId\", responseJSON[\"id\"])\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.username).to.eql(\"user_6\");\r",
+							"    pm.expect(jsonData.firstname).to.eql(\"firstname_user_6\");\r",
+							"    pm.expect(jsonData.lastname).to.eql(\"lastName_user_6\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"user_6@gmail.com\");\r",
+							"    pm.expect(jsonData.phone).to.eql(\"+79991110000\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user_6\",\r\n    \"firstname\": \"firstname_user_6\",\r\n    \"lastname\": \"lastName_user_6\",\r\n    \"email\": \"user_6@gmail.com\",\r\n    \"phone\": \"+79991110000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}\\user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User 7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"pm.collectionVariables.set(\"userId\", responseJSON[\"id\"])\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.username).to.eql(\"user_7\");\r",
+							"    pm.expect(jsonData.firstname).to.eql(\"firstname_user_7\");\r",
+							"    pm.expect(jsonData.lastname).to.eql(\"lastName_user_7\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"user_7@gmail.com\");\r",
+							"    pm.expect(jsonData.phone).to.eql(\"+79992220007\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user_7\",\r\n    \"firstname\": \"firstname_user_7\",\r\n    \"lastname\": \"lastName_user_7\",\r\n    \"email\": \"user_7@gmail.com\",\r\n    \"phone\": \"+79992220007\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}\\user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partial edit User 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.username).to.eql(\"user_1_edited\");\r",
+							"    pm.expect(jsonData.firstname).to.eql(\"firstname_user_1_edited\");\r",
+							"    pm.expect(jsonData.lastname).to.eql(\"lastname_1\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"user_1@gmail.com\");\r",
+							"    pm.expect(jsonData.phone).to.eql(\"+79001234001\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user_1_edited\",\r\n    \"firstname\": \"firstname_user_1_edited\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}\\user\\1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partial edit User 1 wrong phone number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(400)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(400);\r",
+							"    pm.expect(jsonData.message).to.eql(\"Phone number format invalid. For example: '+11 999 123 00 01' or '+119991230001'\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user_1_edited\",\r\n    \"firstname\": \"firstname_user_1_edited\",\r\n    \"phone\": \"+7900123001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}\\user\\1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.username).to.eql(\"user_2_edit\");\r",
+							"    pm.expect(jsonData.firstname).to.eql(\"firstname_user_2_edit\");\r",
+							"    pm.expect(jsonData.lastname).to.eql(\"lastName_user_2_edit\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"user_2_edit@gmail.com\");\r",
+							"    pm.expect(jsonData.phone).to.eql(\"+79991010000\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user_2_edit\",\r\n    \"firstname\": \"firstname_user_2_edit\",\r\n    \"lastname\": \"lastName_user_2_edit\",\r\n    \"email\": \"user_2_edit@gmail.com\",\r\n    \"phone\": \"+79991010000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}\\user\\2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User 2 wrong email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(400)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(400);\r",
+							"    pm.expect(jsonData.message).to.eql(\"Email format invalid. For example: 'adress@email.com'\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user_2_edit\",\r\n    \"firstname\": \"firstname_user_2_edit\",\r\n    \"lastname\": \"lastName_user_2_edit\",\r\n    \"email\": \"user_2_edit@gmailcom\",\r\n    \"phone\": \"+79991010000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}\\user\\2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(204)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}\\user\\1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "healthcheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{probeUrl}}/health",
+					"host": [
+						"{{probeUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "live probe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{probeUrl}}/probe/live",
+					"host": [
+						"{{probeUrl}}"
+					],
+					"path": [
+						"probe",
+						"live"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ready probe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.test(\"validate response\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{probeUrl}}/probe/ready",
+					"host": [
+						"{{probeUrl}}"
+					],
+					"path": [
+						"probe",
+						"ready"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://arch.homework/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "probeUrl",
+			"value": "http://arch.homework",
+			"type": "default"
+		},
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}

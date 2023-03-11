@@ -1,0 +1,21 @@
+replicaCount: 3
+
+image:
+  repository: yakovmm/otus-msa-hw2
+  pullPolicy: IfNotPresent
+  tag: v1
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: arch.homework
+      paths:
+        - path: /
+          pathType: Prefix

@@ -28,9 +28,9 @@ spring:
 
   datasource:
     driverClassName: org.postgresql.Driver
-    url: ${DB_HOST:jdbc:postgresql://localhost:5432/test}
-    username: ${DB_USER:sa}
-    password: ${DB_PASSWORD:postgres}
+    url: ${DB_HOST}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     hikari:
       connection-test-query: Select 1
   sql:
@@ -39,5 +39,5 @@ spring:
       platform: postgres
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
-      username: sa
-      password: postgres
+      username: ${DB_USER}
+      password: ${DB_PASSWORD}

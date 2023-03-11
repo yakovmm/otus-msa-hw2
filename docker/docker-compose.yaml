@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  db:
+    container_name: postgre-sql
+    image: postgres:15.2
+    restart: always
+    networks:
+      - otus-msa-hw2
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_DB: test
+      POSTGRES_PASSWORD: example
+      TZ: Europe/Moscow
+  app:
+    container_name: crud-app
+    image: yakovmm/otus-msa-hw2:v1
+    networks:
+      - otus-msa-hw2
+    restart: always
+    ports:
+      - 80:8000
+    environment:
+      HTTP_PORT: 8000
+      APP_LOG_LEVEL: ERROR
+      DB_HOST: jdbc:postgresql://db/test
+      DB_USER: sa
+      DB_PASSWORD: example
+    depends_on: 
+      - db
+
+networks:
+  otus-msa-hw2:

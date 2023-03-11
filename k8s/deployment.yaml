@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: otus-msa-hw1
+  name: otus-msa-hw2
   labels:
     app: ym-otus-msa-hw2
 spec:
@@ -18,7 +18,7 @@ spec:
         - name: otus-msa-hw2
           image: yakovmm/otus-msa-hw2:v1
           ports:
-          - containerPort: 80
+          - containerPort: 8000
           env:
             - name: HTTP_PORT
               value: "8000"
@@ -29,7 +29,7 @@ spec:
             - name: DB_USER
               value: sa
             - name: DB_PASSWORD
-              value: postgres
+              value: password
           livenessProbe:
             httpGet:
               path: /probe/live
